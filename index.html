@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String servant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style type="text/css">
+        body {
+          display: flex;
+          min-height: 100vh;
+          flex-direction: column;
+        }
+
+        #root {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    String servant
+                </h1>
+                <h2 class="subtitle">
+                    A simple Vue.js string converter.
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="root">
+        <div class="container" style="padding-top: 2em;">
+            <h1 class="title">Convert string</h1>
+            <h2 class="subtitle" style="margin-bottom: 3em;">
+                Paste your string into following textarea and convert it as you wish.
+            </h2>
+
+            <div class="field">
+                <div class="control">
+                    <textarea class="textarea" placeholder="Your string" v-model="message" @keyup="countLength"></textarea>
+                </div>
+            </div>
+            <p style="margin-bottom: 2em;">
+                Number of characters: <span style="font-weight: bold">{{ this.textLength }}</span>
+            </p>
+            <div class="field is-grouped">
+                <div class="control" v-if="this.originalMessage">
+                    <button class="button is-primary" @click="reset">Original</button>
+                </div>
+                <div class="control">
+                    <button class="button" @click="convertToLowercase">to lowercase</button>
+                </div>
+                <div class="control">
+                    <button class="button" @click="convertToUppercase">to uppercase</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link" @click="clear">Clear</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+            <p>
+                <strong>Helper</strong> by <a href="http://silencesys.com"> Martin Rocek</a>. The source code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                </p>
+            <p>
+                <a class="icon" href="https://github.com/silencesys">
+                  <i class="fa fa-github"></i>
+                </a>
+            </p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="core.js"></script>
+</body>
+</html>
