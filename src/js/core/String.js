@@ -79,7 +79,8 @@ class String {
      *  set original content to conten value, works only when ctrl+v is pressed
      */
     setOriginalContent() {
-            this.originalContent = this.content;
+        this.originalContent = this.content;
+        this.notEqual = false;
     }
 
     areStringsEqual()
