@@ -11,13 +11,21 @@ const app = new Vue({
     data: {
         string: new String ({
             content: null,
-            length: 0
+            length: 0,
+            notEqual: false
         })
     },
     methods: {
         copyToClipboard()
         {
             this.$clipboard(this.string.content);
+        }
+    },
+    watch: {
+        'string.content': function() {
+            if (this.string.originalContent !== null) {
+                this.string.areStringsEqual();
+            }
         }
     }
 });

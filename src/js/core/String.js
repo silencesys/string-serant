@@ -32,7 +32,7 @@ class String {
         let message = this.content;
         this.updateOriginalContent(message);
 
-        return this.content = message.toLowerCase();
+        this.content = message.toLowerCase();
     }
 
     /**
@@ -43,7 +43,7 @@ class String {
         let message = this.content;
         this.updateOriginalContent(message);
 
-        return this.content = message.toUpperCase();
+        this.content = message.toUpperCase();
     }
 
     /**
@@ -51,7 +51,7 @@ class String {
      */
     pasteOriginal()
     {
-        return this.content = this.originalContent;
+        this.content = this.originalContent;
     }
 
     /**
@@ -62,6 +62,7 @@ class String {
         this.content = null;
         this.originalContent = null;
         this.length = 0;
+        this.notEqual = false;
     }
 
     /**
@@ -79,6 +80,15 @@ class String {
      */
     setOriginalContent() {
             this.originalContent = this.content;
+    }
+
+    areStringsEqual()
+    {
+        if (this.content !== this.originalContent) {
+            return this.notEqual = true;
+        }
+
+        return this.notEqual = false;
     }
 }
 
