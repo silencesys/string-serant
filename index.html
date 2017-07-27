@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>String servant</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.4/css/bulma.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <style type="text/css">
         body {
           display: flex;
@@ -22,7 +20,7 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
+                <h1 class="title" style="font-size: 2.85em">
                     String servant
                 </h1>
                 <h2 class="subtitle">
@@ -32,7 +30,7 @@
         </div>
     </section>
 
-    <section class="section" id="root">
+    <section class="section" id="root" @keyup.control.67="copyToClipboard">
         <div class="container" style="padding-top: 2em;">
             <h1 class="title">Convert string</h1>
             <h2 class="subtitle" style="margin-bottom: 3em;">
@@ -41,24 +39,27 @@
 
             <div class="field">
                 <div class="control">
-                    <textarea class="textarea" placeholder="Your string" v-model="message" @keyup="countLength"></textarea>
+                    <textarea class="textarea" placeholder="Your string" v-model="string.content" @keyup="string.updateLength()"></textarea>
                 </div>
             </div>
             <p style="margin-bottom: 2em;">
-                Number of characters: <span style="font-weight: bold">{{ this.textLength }}</span>
+                Number of characters: <span style="font-weight: bold">{{ string.length }}</span>
             </p>
             <div class="field is-grouped">
-                <div class="control" v-if="this.originalMessage">
-                    <button class="button is-primary" @click="reset">Original</button>
+                <div class="control">
+                    <button class="button is-primary" @click="copyToClipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
                 </div>
                 <div class="control">
-                    <button class="button" @click="convertToLowercase">to lowercase</button>
+                    <button class="button" @click="string.convertToLowerCase()">Lowercase</button>
                 </div>
                 <div class="control">
-                    <button class="button" @click="convertToUppercase">to uppercase</button>
+                    <button class="button" @click="string.convertToUpperCase()">Uppercase</button>
+                </div>
+                <div class="control" v-if="string.originalContent">
+                    <button class="button" @click="string.pasteOriginal()">Original</button>
                 </div>
                 <div class="control">
-                    <button class="button is-link" @click="clear">Clear</button>
+                    <button class="button is-link" @click="string.clear()">Clear</button>
                 </div>
             </div>
         </div>
@@ -79,7 +80,8 @@
             </div>
         </div>
     </footer>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="core.js"></script>
+
+    <script src="dist/app.js"></script>
+
 </body>
 </html>
