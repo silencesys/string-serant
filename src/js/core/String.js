@@ -73,6 +73,13 @@ class String {
             this.originalContent = message;
         }
     }
+
+    /**
+     *  set original content to conten value, works only when ctrl+v is pressed
+     */
+    setOriginalContent() {
+            this.originalContent = this.content;
+    }
 }
 
 export default String;

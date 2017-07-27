@@ -39,7 +39,7 @@
 
             <div class="field">
                 <div class="control">
-                    <textarea class="textarea" placeholder="Your string" v-model="string.content" @keyup="string.updateLength()"></textarea>
+                    <textarea class="textarea" placeholder="Your string" v-model="string.content" @keyup="string.updateLength()" @keyup.ctrl.86="string.replaceOriginalContent()"></textarea>
                 </div>
             </div>
             <p style="margin-bottom: 2em;">
