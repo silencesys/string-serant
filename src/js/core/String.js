@@ -1,17 +1,39 @@
+/**
+ * This class is helper for basic string transforms. It could be extended or
+ * reduced, most of the stuff could be done in Vue.js itself.
+ *
+ * @author Martin Rocek
+ */
 class String {
     /**
-     * Construct
-     * @param  {object} data {content: null, length: 0}
+     * Construct String class
+     *
+     * @param  {object}
      * @return void
      */
     constructor(data) {
-        this.originalData = data;
+        this.options = {
+            // content of the textarea
+            content: '',
+            // length of the content of the textarea
+            length: 0,
+            // original string from the textarea element
+            originalContent: '',
+            // are strings in textarea and originalContent equal
+            isContentEqual: true,
+            // Replace substring with and what
+            replace: {
+                what: '',
+                with: ''
+            }
+        };
 
-        for (let field in data) {
+        this.options = Object.assign(this.options, data);
+
+        // this for allow us to call string.fieldName in our template
+        for (let field in this.options) {
             this[field] = data[field];
         }
-
-        this.originalContent = null;
     }
 
     /**
@@ -22,74 +44,115 @@ class String {
         if (this.content !== null) {
             return this.length = this.content.length;
         }
+
+        return this.lenght = 0;
     }
 
     /**
      * Convert string to lowercase letters.
+     *
+     * @return {string}
      */
     convertToLowerCase()
     {
         let message = this.content;
+
         this.updateOriginalContent(message);
 
-        this.content = message.toLowerCase();
+        return this.content = message.toLowerCase();
     }
 
     /**
      * Convert string to uppercase letters.
+     *
+     * @return {string}
      */
     convertToUpperCase()
     {
         let message = this.content;
+
         this.updateOriginalContent(message);
 
-        this.content = message.toUpperCase();
+        return this.content = message.toUpperCase();
     }
 
     /**
-     * Replace string with original.
+     * Replace substrings inside main string with given words.
+     *
+     * @return {string}
+     */
+    replaceSubstrings()
+    {
+        var regEx = new RegExp(this.replace.what, "ig");
+
+        this.updateOriginalContent(this.content);
+
+        return this.content = this.content.replace(regEx, this.replace.with);
+    }
+
+    /**
+     * Replace content with value of the original content. This means that
+     * modified string will be replaced by original string.
+     *
+     * @return {string}
      */
     pasteOriginal()
     {
-        this.content = this.originalContent;
+        return this.content = this.originalContent;
     }
 
     /**
-     * Clear string data.
+     * Reset data object inside this class.
+     *
+     * @return void
      */
     clear()
     {
-        this.content = null;
-        this.originalContent = null;
+        this.content = '';
+        this.originalContent = '';
         this.length = 0;
-        this.notEqual = false;
+        this.isContentEqual = true;
     }
 
     /**
-     * Update original content with current string.
+     * Update original content value with message string.
+     *
      * @param  {string} message
+     * @return {string}
      */
     updateOriginalContent(message) {
-        if (this.originalContent === null) {
-            this.originalContent = message;
+        if (
+            this.originalContent === undefined
+            || this.originalContent.length <= 0
+        ) {
+            return this.originalContent = message;
         }
     }
 
     /**
-     *  set original content to conten value, works only when ctrl+v is pressed
+     *  Replace content of the originalContent value with current value from
+     *  content field.
+     *
+     * @return void
      */
-    setOriginalContent() {
+    replaceOriginalContent() {
         this.originalContent = this.content;
-        this.notEqual = false;
+        this.isContentEqual  = true;
     }
 
+    /**
+     * Determine whether content and originalContent strings are equal, if not
+     * set isContentEqual field to false.
+     *
+     * @return {bool}
+     */
     areStringsEqual()
     {
-        if (this.content !== this.originalContent) {
-            return this.notEqual = true;
+        if (this.content !== this.originalContent && this.originalContent !== undefined) {
+            return this.isContentEqual = false;
         }
 
-        return this.notEqual = false;
+        return this.isContentEqual = true;
     }
 }
 

@@ -34,33 +34,63 @@
         <div class="container" style="padding-top: 2em;">
             <h1 class="title">Convert string</h1>
             <h2 class="subtitle" style="margin-bottom: 3em;">
-                Paste your string into following textarea and convert it as you wish.
+                Paste your string into following textarea and change it.
             </h2>
 
             <div class="field">
                 <div class="control">
-                    <textarea class="textarea" placeholder="Your string" v-model="string.content" @keyup="string.updateLength()" @keyup.ctrl.86="string.setOriginalContent()"></textarea>
+                    <textarea class="textarea" placeholder="Your string" v-model="string.content" @keyup="string.updateLength()" @keyup.ctrl.86="string.replaceOriginalContent()"></textarea>
                 </div>
             </div>
-            <p style="margin-bottom: 2em;">
-                Number of characters: <span style="font-weight: bold">{{ string.length }}</span>
-            </p>
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-primary" @click="copyToClipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal" style="text-align: left;">
+                    <label class="label">Replace</label>
                 </div>
-                <div class="control">
-                    <button class="button" @click="string.convertToLowerCase()">Lowercase</button>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded">
+                            <input class="input" placeholder="What" v-model="string.replace.what">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control is-expanded">
+                            <input class="input" placeholder="With" v-model="string.replace.with">
+                        </p>
+                    </div>
                 </div>
-                <div class="control">
-                    <button class="button" @click="string.convertToUpperCase()">Uppercase</button>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal" style="text-align: left;">
+                    <label class="label">String length</label>
                 </div>
-                <div class="control" v-if="string.notEqual">
-                    <button class="button" @click="string.pasteOriginal()">Original</button>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" v-model="string.length">
+                        </div>
+                    </div>
                 </div>
-                <div class="control">
-                    <button class="button is-link" @click="string.clear()">Clear</button>
-                </div>
+            </div>
+            <div class="field is-grouped" style="margin-top: 2em;">
+                    <div class="control">
+                        <button class="button is-primary" @click="copyToClipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="control">
+                        <button class="button" @click="string.replaceSubstrings()">Replace</button>
+                    </div>
+                    <div class="control">
+                        <button class="button" @click="string.convertToLowerCase()">Lowercase</button>
+                    </div>
+                    <div class="control">
+                        <button class="button" @click="string.convertToUpperCase()">Uppercase</button>
+                    </div>
+                    <div class="control" v-if="! string.isContentEqual">
+                        <button class="button" @click="string.pasteOriginal()">Original</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link" @click="string.clear()">Clear</button>
+                    </div>
             </div>
         </div>
     </section>

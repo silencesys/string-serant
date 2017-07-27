@@ -10,9 +10,13 @@ const app = new Vue({
     el: '#root',
     data: {
         string: new String ({
-            content: null,
+            content: '',
             length: 0,
-            notEqual: false
+            isContentEqual: true,
+            replace: {
+                what: '',
+                with: ''
+            }
         })
     },
     methods: {
@@ -23,7 +27,7 @@ const app = new Vue({
     },
     watch: {
         'string.content': function() {
-            if (this.string.originalContent !== null) {
+            if (this.string.originalContent !== undefined) {
                 this.string.areStringsEqual();
             }
         }
