@@ -25,7 +25,8 @@ class String {
             replace: {
                 what: '',
                 with: ''
-            }
+            },
+            information: ''
         };
 
         this.options = Object.assign(this.options, data);
@@ -34,6 +35,8 @@ class String {
         for (let field in this.options) {
             this[field] = data[field];
         }
+
+        this.success = false;
     }
 
     /**
@@ -138,6 +141,20 @@ class String {
     replaceOriginalContent() {
         this.originalContent = this.content;
         this.isContentEqual  = true;
+
+        this.showSuccess();
+    }
+
+    showSuccess(message) {
+        this.success = true;
+        this.information = message;
+
+        let self = this;
+
+        setTimeout(function() {
+            self.success = false;
+            self.information = '';
+        }, 2000);
     }
 
     /**

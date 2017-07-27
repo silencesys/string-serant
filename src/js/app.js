@@ -23,6 +23,9 @@ const app = new Vue({
         copyToClipboard()
         {
             this.$clipboard(this.string.content);
+            this.string.success = true;
+
+            this.string.showSuccess('Copy was successfull.');
         }
     },
     watch: {
