@@ -1,10 +1,10 @@
 {
-  "name": "string-servant",
+  "name": "strings",
   "version": "0.0.1",
-  "description": "A simple Vue.js project for simple string conversions.",
-  "main": "/js/app.js",
+  "description": "A simple Vue.js string helper.",
+  "main": "/src/js/app.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/silencesys/string-servant.git"
+    "url": "git+https://github.com/silencesys/strings.git"
   },
   "author": "Martin Rocek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/silencesys/string-servant/issues"
+    "url": "https://github.com/silencesys/strings/issues"
   },
   "homepage": "https://github.com/silencesys/string-servant#readme",
   "devDependencies": {
