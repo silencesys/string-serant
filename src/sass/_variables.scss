@@ -1,0 +1,21 @@
+@mixin gradientBackground {
+    background-color: #74EBD5;
+    background-image: -webkit-linear-gradient(52deg, #74EBD5 0%, #9FACE6 100%);
+    background-image: -o-linear-gradient(52deg, #74EBD5 0%, #9FACE6 100%);
+    background-image: linear-gradient(142deg, #74EBD5 0%, #9FACE6 100%);
+}
+
+@mixin transitions($transitions...) {
+    -webkit-transition: $transitions;
+    -moz-transition: $transitions;
+    -ms-transition: $transitions;
+    -o-transition: $transitions;
+    transition: $transitions;
+}
+
+$white: #fff;
+$grey: #ccdcdc;
+$cyan: #75e9d5;
+$blue: #81d8da;
+$green: #37f79a;
+$red: #f74e37;

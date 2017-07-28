@@ -2,117 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>String servant</title>
+    <title>Strings</title>
+    <link rel="stylesheet" type="text/css" href="dist/app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style type="text/css">
-        body {
-          display: flex;
-          min-height: 100vh;
-          flex-direction: column;
-        }
-
-        #root {
-            flex: 1;
-        }
-    </style>
 </head>
+
 <body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title" style="font-size: 2.85em">
-                    String servant
-                </h1>
-                <h2 class="subtitle">
-                    A simple Vue.js string converter.
-                </h2>
-            </div>
-        </div>
+    <header>
+        <section class="content">
+            <h1 class="title">Strings</h1>
+            <h2 class="subtitle">A simple Vue.js string converter.</h2>
+        </section>
+    </header>
+
+    <section id="root" class="site-content" @keyup.ctrl.67="copyToClipboard">
+        <transition name="fade" v-if="string.information">
+            <section class="notification-message" v-bind:class="{ 'success': string.success }">
+                <i class="fa" :class="{ 'fa-check' : string.success }" aria-hidden="true"></i>
+                {{ string.information }}
+            </section>
+        </transition>
+
+        <section class="inline-content">
+            <section>
+            <h2>Convert</h2>
+            <p>Paste your string into following textarea and change it.</p>
+            </section>
+
+            <section class="character-count">
+                <p class="counter">{{ string.length }}</p>
+                <p>Characters</p>
+            </section>
+        </section>
+
+        <textarea v-model="string.content" @keyup="string.updateLength()" @keyup.ctrl.86="string.replaceOriginalContent()"></textarea>
+
+        <section class="inline-content">
+            <label>Replace</label>
+            <input type="text" name="what" placeholder="what" v-model="string.replace.what">
+            <input type="text" name="with" placeholder="with" v-model="string.replace.with">
+        </section>
+
+        <section class="inline-buttons">
+            <button class="is-primary" @click="copyToClipboard">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+            </button>
+            <button @click="string.replaceSubstrings()">Replace</button>
+            <button @click="string.convertToLowerCase()">Lowercase</button>
+            <button @click="string.convertToUpperCase()">Uppercase</button>
+            <button v-if="! string.isContentEqual" @click="string.pasteOriginal()">Original</button>
+            <button class="is-link" @click="string.clear()">Clear</button>
+        </section>
     </section>
 
-    <section class="section" id="root" @keyup.ctrl.67="copyToClipboard">
-        <div class="container" style="padding-top: 2em;">
-            <h1 class="title">Convert string</h1>
-            <h2 class="subtitle" style="margin-bottom: 3em;">
-                Paste your string into following textarea and change it.
-            </h2>
-
-            <div class="field">
-                <div class="control">
-                    <textarea class="textarea" placeholder="Your string" v-bind:class="{ 'is-success': string.success }" v-model="string.content" @keyup="string.updateLength()" @keyup.ctrl.86="string.replaceOriginalContent()"></textarea>
-                </div>
-                <p class="help is-success" v-if="string.information">{{ string.information }}</p>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal" style="text-align: left;">
-                    <label class="label">Replace</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <p class="control is-expanded">
-                            <input class="input" placeholder="What" v-model="string.replace.what">
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control is-expanded">
-                            <input class="input" placeholder="With" v-model="string.replace.with">
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="field is-horizontal">
-                <div class="field-label is-normal" style="text-align: left;">
-                    <label class="label">Length</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control">
-                            <input class="input" type="text" v-model="string.length">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-grouped" style="margin-top: 2em;">
-                    <div class="control">
-                        <button class="button is-primary" @click="copyToClipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
-                    </div>
-                    <div class="control">
-                        <button class="button" @click="string.replaceSubstrings()">Replace</button>
-                    </div>
-                    <div class="control">
-                        <button class="button" @click="string.convertToLowerCase()">Lowercase</button>
-                    </div>
-                    <div class="control">
-                        <button class="button" @click="string.convertToUpperCase()">Uppercase</button>
-                    </div>
-                    <div class="control" v-if="! string.isContentEqual">
-                        <button class="button" @click="string.pasteOriginal()">Original</button>
-                    </div>
-                    <div class="control">
-                        <button class="button is-link" @click="string.clear()">Clear</button>
-                    </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer" style="height: 100px;">
-        <div class="container">
-            <div class="content has-text-centered">
-            <p>
-                <strong>String servant</strong> by <a href="https://github.com/silencesys"> Martin Rocek</a>. The source code is licensed under the
-                <a href="http://opensource.org/licenses/mit-license.php">MIT license</a>.
-                </p>
-            <p>
-                <a class="icon" href="//github.com/silencesys/string-servant">
-                  <i class="fa fa-github"></i>
-                </a>
-            </p>
-            </div>
-        </div>
+    <footer>
+        <p>
+            <strong>Strings</strong>
+            <a class="icon" href="//github.com/silencesys/string-servant"><i class="fa fa-github"></i></a>
+            by <a href="https://github.com/silencesys"> Martin Rocek</a>. The source code is licensed under the
+            <a href="http://opensource.org/licenses/mit-license.php">MIT license</a>.
+        </p>
     </footer>
 
     <script src="dist/app.js"></script>
-
 </body>
 </html>

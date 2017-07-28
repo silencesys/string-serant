@@ -90,7 +90,11 @@ class String {
 
         this.updateOriginalContent(this.content);
 
-        return this.content = this.content.replace(regEx, this.replace.with);
+        if (this.content = this.content.replace(regEx, this.replace.with)) {
+            this.showSuccess('Words were replaced');
+        }
+
+        return this.content;
     }
 
     /**
@@ -154,7 +158,7 @@ class String {
         setTimeout(function() {
             self.success = false;
             self.information = '';
-        }, 2000);
+        }, 2500);
     }
 
     /**

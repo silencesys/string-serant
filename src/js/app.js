@@ -1,4 +1,4 @@
-import 'bulma/css/bulma.css'
+import 'normalize.css'
 import Clipboard from 'v-clipboard'
 import String    from './core/String.js'
 
@@ -25,7 +25,7 @@ const app = new Vue({
             this.$clipboard(this.string.content);
             this.string.success = true;
 
-            this.string.showSuccess('Copy was successfull.');
+            this.string.showSuccess('Content copied.');
         }
     },
     watch: {

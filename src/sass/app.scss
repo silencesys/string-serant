@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,400i,700');
+@import 'variables';
+
+html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    @extend html;
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+header {
+    @include gradientBackground;
+    color: $white;
+    font-family: 'Alegreya Sans', sans-serif;
+    width: 100%;
+
+    .content {
+        box-sizing: border-box;
+        padding: 4% 15%;
+        width: 100%;
+    }
+    .title {
+        font-size: 5em;
+        margin: 0;
+    }
+    .subtitle {
+        font-weight: 300;
+        margin: 0;
+    }
+}
+
+.site-content {
+    box-sizing: border-box;
+    font-family: 'Alegreya Sans', sans-serif;
+    padding: 3% 15%;
+    position: relative;
+    width: 100%;
+    flex: 1;
+
+    .notification-message {
+        box-sizing: border-box;
+        width: 100%;
+        position: absolute;
+        padding: 1% 15%;
+        top: 0;
+        left: 0;
+
+        &.success {
+            color: darken($green, 30);
+            background: $green;
+            border-top: .05rem solid darken($green, 15);
+        }
+
+        .fa {
+            margin-right: .5em;
+        }
+    }
+
+    h2, p.counter {
+        font-size: 2.5em;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        font-weight: 300;
+        margin: 0 0 1em;
+        padding: 0;
+    }
+
+    textarea {
+        @include transitions(border-color .3s ease-out)
+        border-radius: .5em;
+        border: 1px solid $grey;
+        box-sizing: border-box;
+        font-family: 'Alegreya Sans', sans-serif;
+        font-size: 1em;
+        margin: 1.5em 0 0 0;
+        min-height: 120px;
+        padding: 1em;
+        resize: vertical;
+        width: 100%;
+
+        &:focus {
+            border-color: $cyan;
+            outline: none;
+        }
+    }
+
+    .inline-content {
+        display: flex;
+        margin: 1rem 0 0 0;
+        position: relative;
+    }
+
+    .character-count {
+        position: absolute;
+        right: 0;
+        text-align: right;
+    }
+
+    input[type="text"] {
+        @include transitions(border-color .3s ease-out)
+        border-radius: .5em;
+        border: 1px solid $grey;
+        box-sizing: border-box;
+        font-family: 'Alegreya Sans', sans-serif;
+        font-size: 1em;
+        margin: 0 0 0 1.5rem;
+        padding: 1em;
+        vertical-align: middle;
+        width: 100%;
+
+        &:focus {
+            border-color: $cyan;
+            outline: none;
+        }
+    }
+
+    label {
+        box-sizing: border-box;
+        font-weight: 700;
+        padding: 1rem 0;
+        vertical-align: middle;
+        width: 300px;
+    }
+
+    .inline-buttons {
+        margin: 6rem 0 0 0;
+    }
+
+    button {
+        @include transitions(background-color .3s ease-in, border-color .2s ease-in)
+        background: none;
+        border-radius: .5em;
+        border: 1px solid $grey;
+        box-sizing: border-box;
+        font-family: 'Alegreya Sans', sans-serif;
+        font-size: 1em;
+        margin: 0 1rem 0 0;
+        padding: .7em 1.3em;
+        vertical-align: middle;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+            border-color: darken($grey, 10);
+        }
+        &:active {
+            border-color: darken($grey, 30);
+        }
+    }
+
+    .is-primary {
+        background: $blue;
+        border-color: darken($blue, 10);
+        color: $white;
+        outline: none;
+
+        &:hover {
+            background: darken($blue, 10);
+            border-color: darken($blue, 30);
+        }
+        &:active {
+            background: darken($blue, 20);
+            border-color: darken($blue, 10);
+        }
+    }
+
+    .is-link {
+        background: none;
+        border-color: $white;
+        outline: none;
+
+        &:hover {
+            background: #edf6f5;
+            border-color: $white;
+        }
+        &:active {
+            background: #edf6f5;
+            border-color: #adb4b3;
+        }
+    }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+footer {
+    box-sizing: border-box;
+    font-family: 'Alegreya Sans', sans-serif;
+    padding: 0 15%;
+    position: relative;
+    width: 100%;
+    background-color: lighten($grey, 12);
+
+    a {
+        @include transitions(color .3s ease-in)
+        color: #4fadca;
+        text-decoration: none;
+
+        &:hover {
+            color: #009193;
+        }
+    }
+
+    .fa {
+        margin: 0 .5em;
+    }
+}
